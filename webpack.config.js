@@ -2,28 +2,20 @@ var webpack = require("webpack");
 var path = require("path");
 
 var entry_list = [
-    "dojo_01_animation",
-    "dojo_02_topic",
-    "dojo_03_keyboard",
-    "dojo_04_request",
-    "dijit_01_key_nav",
-    "dijit_02_layout",
-    "dijit_03_form",
-    "dijit_04_menus",
-    "dijit_05_templated",
-    "dgrid_01_hello",
-    "dgrid_02_stores",
-    "dgrid_03_col_set",
-    "dgrid_04_comp_col",
-    "dgrid_05_single_query",
-    "dgrid_06_summary_row",
-    "dgrid_07_dropdown"
+    "index"
 ];
 var entry = {};
-entry_list.forEach(function(e) { entry[e] = path.resolve(__dirname, "./src/" + e) });
+entry_list.forEach(function (e) { entry[e] = path.resolve(__dirname, "./src/" + e) });
 
 module.exports = {
     entry: entry,
+    output: {
+        path: path.resolve(__dirname, 'dist/'),
+        publicPath: "dist/",
+        filename: "dgrid.js",
+        libraryTarget: "umd",
+        library: "HPCCDGrid"
+    },
     resolveLoader: {
         modulesDirectories: [
             path.resolve(__dirname, './node_modules/')
@@ -43,14 +35,16 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: "dojo-webpack-loader",
-                include: path.resolve(__dirname, '../dojo/'),
-            },
+                include: path.resolve(__dirname, '../dojo/')
+            }, {
+                test: /\.css$/,
+                loader: "style-loader!css-loader"
+            }, {
+                test: /\.png$/,
+                loader: "url-loader",
+                query: { mimetype: "image/png" }
+            }
         ]
-    },
-    output: {
-        path: path.resolve(__dirname, 'bundle/'),
-        publicPath: "bundle/",
-        filename: "[name].bundle.js"
     },
 
     dojoWebpackLoader: {
