@@ -1,15 +1,21 @@
-exports.dom = require('dojo/dom');
-exports.on = require('dojo/on');
-exports.declare = require("dojo/_base/declare");
-exports.Memory = require("dstore/Memory");
-exports.RequestMemory = require('dstore/RequestMemory');
-exports.OnDemandGrid = require('dgrid/OnDemandGrid');
-exports.Pagination = require("dgrid/extensions/Pagination");
-exports.Keyboard = require("dgrid/Keyboard");
-exports.Selection = require("dgrid/Selection");
-exports.Grid = exports.declare([exports.OnDemandGrid, exports.Keyboard, exports.Selection]);
-exports.PagingGrid = exports.declare([exports.OnDemandGrid, exports.Keyboard, exports.Selection, exports.Pagination]);
-exports.PagingGrid.prototype.i18nPagination = {
+import * as declare from "dojo/_base/declare";
+import * as _Memory from "dstore/Memory";
+import * as OnDemandGrid from 'dgrid/OnDemandGrid';
+import * as Keyboard from "dgrid/Keyboard";
+import * as Selection from "dgrid/Selection";
+import * as Pagination from "dgrid/extensions/Pagination";
+/*
+import * as dom from 'dojo/dom';
+import * as on from 'dojo/on';
+import * as RequestMemory from 'dstore/RequestMemory';
+*/
+
+import "dgrid/extensions/nls/pagination";
+import "dgrid/css/dgrid.css";
+
+export const Memory = _Memory;
+export const PagingGrid = declare([OnDemandGrid, Keyboard, Selection, Pagination]);
+PagingGrid.prototype.i18nPagination = {
     status: '${start} - ${end} of ${total} results',
     gotoFirst: 'Go to first page',
     gotoNext: 'Go to next page',
@@ -20,5 +26,17 @@ exports.PagingGrid.prototype.i18nPagination = {
     rowsPerPage: 'Number of rows per page'
 };
 
-require("dgrid/extensions/nls/pagination");
-require("dgrid/css/dgrid.css");
+/*
+export const Grid = declare([OnDemandGrid, Keyboard, Selection]);
+export const PagingGrid = declare([OnDemandGrid, Keyboard, Selection, Pagination]);
+PagingGrid.prototype.i18nPagination = {
+    status: '${start} - ${end} of ${total} results',
+    gotoFirst: 'Go to first page',
+    gotoNext: 'Go to next page',
+    gotoPrev: 'Go to previous page',
+    gotoLast: 'Go to last page',
+    gotoPage: 'Go to page',
+    jumpPage: 'Jump to page',
+    rowsPerPage: 'Number of rows per page'
+};
+*/

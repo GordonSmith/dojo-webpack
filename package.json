@@ -14,7 +14,7 @@
     "rimraf": "^2.6.1",
     "style-loader": "^0.17.0",
     "url-loader": "^0.5.8",
-    "webpack": "^1.12.15"
+    "webpack": "^2.5.1"
   },
   "repository": {
     "type": "git",
